@@ -10,7 +10,7 @@ using std::find_if;
 using std::for_each;
 using std::sort;
 
-void merge_and_sort();
+void merge_filter_and_sort();
 
 int main(int argc, char* argv[]) { 
     merge_filter_and_sort(); 
