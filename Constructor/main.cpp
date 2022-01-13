@@ -27,4 +27,6 @@ int main(int argc, char* argv[]) {
   buf_1.push(102);
   buf_0.print("Buffer 0");
   buf_1.print("Buffer 1");
+
+  RingBuffer(std::move(buf_1)).print("Buffer Moved");
 }

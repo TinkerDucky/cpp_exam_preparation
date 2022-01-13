@@ -17,6 +17,7 @@ class RingBuffer {
   RingBuffer(unsigned int size, const int* init_data);
   ~RingBuffer();
   RingBuffer(const RingBuffer& obj);
+  RingBuffer(RingBuffer&& obj) noexcept;
   RingBuffer& operator=(RingBuffer obj);
   void push(int val);
 

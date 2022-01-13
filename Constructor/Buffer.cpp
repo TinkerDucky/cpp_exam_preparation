@@ -1,6 +1,8 @@
 #include "Buffer.h"
 
-RingBuffer::RingBuffer(unsigned int size) : size(size), data(new int[size]{}) {}
+RingBuffer::RingBuffer(unsigned int size) : size(size), data(new int[size]{}) {
+  cout << "RingBuffer(unsigned int size) constructor." << endl;
+}
 
 RingBuffer::RingBuffer(unsigned int size, int init_value)
     : size(size), data(new int[size]) {
@@ -19,7 +21,10 @@ RingBuffer::RingBuffer(unsigned int size, const int* init_data)
   }
 }
 
-RingBuffer::~RingBuffer() { delete this->data; }
+RingBuffer::~RingBuffer() {
+    cout << "~RingBuffer destructor." << endl;
+    delete this->data; 
+}
 
 RingBuffer::RingBuffer(const RingBuffer& obj)
     : size(obj.size), data(new int[obj.size]{}) {
@@ -27,6 +32,13 @@ RingBuffer::RingBuffer(const RingBuffer& obj)
   for (int i = 0; i < this->size; i++) {
     this->data[i] = obj.data[i];
   }
+}
+
+RingBuffer::RingBuffer(RingBuffer&& obj) noexcept : size(obj.size),
+    data(obj.data) {
+  cout << "RingBuffer(RingBuffer&& obj) noexcept move constructor." << endl;
+  obj.data = nullptr;
+  obj.size = 0;
 }
 
 RingBuffer& RingBuffer::operator=(RingBuffer obj) {
