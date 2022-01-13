@@ -27,15 +27,14 @@ RingBuffer::~RingBuffer() {
 }
 
 RingBuffer::RingBuffer(const RingBuffer& obj)
-    : size(obj.size), data(new int[obj.size]{}) {
+    : size(obj.size), data(new int[obj.size]{}), pos(obj.pos) {
   cout << "RingBuffer(const RingBuffer& obj) copy constructor." << endl;
   for (int i = 0; i < this->size; i++) {
     this->data[i] = obj.data[i];
   }
 }
 
-RingBuffer::RingBuffer(RingBuffer&& obj) noexcept : size(obj.size),
-    data(obj.data) {
+RingBuffer::RingBuffer(RingBuffer&& obj) noexcept : size(obj.size), data(obj.data), pos(obj.pos) {
   cout << "RingBuffer(RingBuffer&& obj) noexcept move constructor." << endl;
   obj.data = nullptr;
   obj.size = 0;
@@ -51,6 +50,7 @@ void RingBuffer::swap(RingBuffer& obj) {
   using std::swap;
   swap(this->size, obj.size);
   swap(this->data, obj.data);
+  swap(this->pos, obj.pos);
 }
 
 void RingBuffer::push(int val) { this->data[pos++ % size] = val; }
