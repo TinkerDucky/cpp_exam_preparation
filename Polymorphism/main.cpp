@@ -24,12 +24,12 @@ int main(int argc, char* argv[]) {
   pokemon.push_back(new Schiggy(string("Schiggy"), trank));
   pokemon.push_back(new Bisasam(string("Bisasam"), trank));
 
-  auto attack = [](Pokemon* p) -> void {
+  auto pred = [](Pokemon* p) -> void {
     p->speak();
 	p->attack();
     p->useItem();
   };
 
-  for_each(pokemon.begin(), pokemon.end(), attack);
+  for_each(pokemon.begin(), pokemon.end(), pred);
 
 }

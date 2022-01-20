@@ -23,6 +23,6 @@ class Pokemon {
 
   Item& getItem() { return *(this->item); }
   void useItem() { this->item->useItem(); }
-  void attack();
-  void speak();
+  virtual void attack();
+  virtual void speak();
 };
