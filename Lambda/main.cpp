@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <vector>
 
+#include "IsEven.h"
+
 using std::cout;
 using std::endl;
 using std::vector;
@@ -21,7 +23,7 @@ void merge_filter_and_sort() {
   std::vector<int> vec2 = {102, 64, 47, 6, 5, 4, 18};
   std::vector<int> vec3;
 
-  auto isEven = [](int num) -> bool { return !(num % 2); };
+  IsEven isEven = IsEven();
 
   auto printValue = [](int val) -> void { cout << "Value = " << val << endl; };
 
