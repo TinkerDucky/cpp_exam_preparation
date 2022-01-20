@@ -32,6 +32,8 @@ class Canvas {
   void setPixelColor(unsigned int x, unsigned int y, unsigned int color);
   unsigned int getPixelColor(unsigned int x, unsigned int y);
   void invert();
+  unsigned int getHeight() const { return this->properties.at("height"); }
+  unsigned int getWidth() const { return this->properties.at("width"); }
 
   void print();
 };

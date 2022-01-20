@@ -16,6 +16,11 @@ int main(int argc, char* argv[]) {
 
   Canvas ref_canvas(5, 5);
 
+  auto ref_lambda = [ref_canvas](const Canvas& canvas) -> bool {
+    return ref_canvas.getHeight() * ref_canvas.getWidth() <
+           canvas.getHeight() * canvas.getWidth();
+  };
+
   canvas_list.push_back(Canvas(8, 8, 0xffff0000));
   canvas_list.push_back(Canvas(3, 3, 0xff00ff00));
   canvas_list.push_back(Canvas(7, 7, 0xff0000ff));
@@ -27,7 +32,7 @@ int main(int argc, char* argv[]) {
   for_each(canvas_list.begin(), canvas_list.end(),
            [](Canvas& c) { c.print(); });
 
-  replace_if(canvas_list.begin(), canvas_list.end(), ref_canvas, ref_canvas);
+  replace_if(canvas_list.begin(), canvas_list.end(), ref_lambda, ref_canvas);
 
   for_each(canvas_list.begin(), canvas_list.end(),
            [](Canvas& c) { c.print(); });
