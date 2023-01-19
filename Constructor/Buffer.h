@@ -18,7 +18,16 @@ class RingBuffer {
   ~RingBuffer();
   RingBuffer(const RingBuffer& obj);
   RingBuffer(RingBuffer&& obj) noexcept;
-  RingBuffer& operator=(RingBuffer obj);
+
+  // Without copy and swap
+  RingBuffer& operator=(const RingBuffer& obj);
+
+  // With copy and swap
+  //RingBuffer& operator=(RingBuffer obj);
+  // 
+  // Without move assignment withoout copy and swap
+  RingBuffer& operator=(RingBuffer&& obj) noexcept;
+
   void push(int val);
 
   void swap(RingBuffer& obj);

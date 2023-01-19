@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
   for_each(canvas_list.begin(), canvas_list.end(),
            [](Canvas& c) { c.print(); });
 
-  replace_if(canvas_list.begin(), canvas_list.end(), ref_lambda, ref_canvas);
+  replace_if(canvas_list.begin(), canvas_list.end(), red_lambda, ref_canvas);
 
   for_each(canvas_list.begin(), canvas_list.end(),
            [](Canvas& c) { c.print(); });

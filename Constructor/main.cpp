@@ -28,5 +28,9 @@ int main(int argc, char* argv[]) {
   buf_0.print("Buffer 0");
   buf_1.print("Buffer 1");
 
-  RingBuffer(std::move(buf_1)).print("Buffer Moved");
+  buf_0 = std::move(buf_1);
+  RingBuffer buf2 = std::move(buf_0);
+  buf2.print("Buffer Moved");
+
+  return 0;
 }

@@ -38,12 +38,41 @@ RingBuffer::RingBuffer(RingBuffer&& obj) noexcept : size(obj.size), data(obj.dat
   cout << "RingBuffer(RingBuffer&& obj) noexcept move constructor." << endl;
   obj.data = nullptr;
   obj.size = 0;
+  obj.pos = 0;
 }
 
-RingBuffer& RingBuffer::operator=(RingBuffer obj) {
-  cout << "RingBuffer::operator=(RingBuffer obj) assignment operator." << endl;
-  swap(obj);
-  return *this;
+// Without copy and swap
+RingBuffer& RingBuffer::operator=(const RingBuffer& obj) {
+    cout << "RingBuffer::operator=(RingBuffer& obj) assignment operator." << endl;
+    this->size = obj.size;
+    this->pos = obj.pos;
+    delete this->data;
+    this->data = new int[obj.size];
+    for (int i = 0; i < obj.size; i++) {
+        this->data[i] = obj.data[i];
+    }
+    return *this;
+}
+
+ // With copy and swap
+//RingBuffer& RingBuffer::operator=(RingBuffer obj) {
+//  cout << "RingBuffer::operator=(RingBuffer obj) assignment operator." << endl;
+//  swap(obj);
+//  return *this;
+//}
+
+//// Move assignment without copy and swap
+RingBuffer& RingBuffer::operator=(RingBuffer&& obj) noexcept {
+    cout << "RingBuffer& RingBuffer::operator=(RingBuffer&& obj) noexcept move assignment operator." << endl;
+    this->data = obj.data;
+    this->size = obj.size;
+    this->pos = obj.pos;
+
+    obj.data = nullptr;
+    obj.size = 0;
+    obj.pos = 0;
+
+    return *this;
 }
 
 void RingBuffer::swap(RingBuffer& obj) {
@@ -53,7 +82,7 @@ void RingBuffer::swap(RingBuffer& obj) {
   swap(this->pos, obj.pos);
 }
 
-void RingBuffer::push(int val) { this->data[pos++ % size] = val; }
+void RingBuffer::push(int val) { this->data[this->pos++ % this->size] = val; }
 
 void RingBuffer::print(const char* name) {
   cout << "----------------------------------------------" << endl;
